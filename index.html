@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommendation Engine</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <header class="topbar">
+        <div class="logo">RecoSys</div>
+        <div class="tag">Personal Recommendation Engine</div>
+    </header>
+
+    <main class="container">
+
+        <section class="panel">
+            <form method="POST" class="form">
+                <input 
+                    type="text" 
+                    name="interests" 
+                    placeholder="Enter interests (e.g. sci-fi, drama, action)"
+                />
+                <button type="submit">Generate</button>
+            </form>
+        </section>
+
+        {% if results %}
+        <section class="results">
+
+            <div class="results-header">
+                <h2>Results</h2>
+                <span>{{ results|length }} matches</span>
+            </div>
+
+            <div class="list">
+
+                {% for item, score in results %}
+                <div class="row">
+
+                    <div class="name">
+                        {{ item }}
+                    </div>
+
+                    <div class="meta">
+                        <div class="score">{{ score }}</div>
+                        <div class="bar">
+                            <div class="fill" style="width: {{ score * 25 }}%"></div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </section>
+        {% endif %}
+
+    </main>
+
+</div>
+
+</body>
+</html>
